@@ -1,0 +1,20 @@
+#!usr/bin/env bash
+
+usage="Usage: $0 install pecl/package"
+
+if [ "$#" == "0" ]; then
+    echo "A command must be provided to use brew-pecl."
+    echo $usage
+    exit 1
+fi
+
+command="$1"
+shift
+
+if [ $command == "install" ]; then
+    LD_LIBRARY_PATH="$(brew --prefix)/lib" LDFLAGS="-L$(brew --prefix)/lib" pecl install $@
+else
+    echo "${command} is not a valid command. Currently, only install is supported."
+    echo $usage
+    exit 1
+fi
