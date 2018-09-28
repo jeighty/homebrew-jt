@@ -1,6 +1,10 @@
-#!usr/bin/env bash
+#:  * `pecl`
+#:    Easily install pecl packages linked against homebrew libraries
+#:
+#:    [<sudo>] `brew pecl` `install` <package>
+#:    Install package, linked against HomeBrew libraries.
 
-usage="Usage: $0 install pecl/package"
+usage="Usage: brew pecl install package"
 
 if [ "$#" == "0" ]; then
     echo "A command must be provided to use brew-pecl."
@@ -12,7 +16,7 @@ command="$1"
 shift
 
 if [ $command == "install" ]; then
-    LD_LIBRARY_PATH="$(brew --prefix)/lib" LDFLAGS="-L$(brew --prefix)/lib" pecl install $@
+    LD_LIBRARY_PATH="${HOMEBREW_PREFIX}/lib" LDFLAGS="-L${HOMEBREW_PREFIX}/lib" pecl install $@
 else
     echo "${command} is not a valid command. Currently, only install is supported."
     echo $usage
